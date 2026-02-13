@@ -379,8 +379,9 @@ def visualize_boxes(df, boxes, cycle_num):
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-        html, body {{ height: 100%; overflow: hidden; }}
-        body {{ font-family: 'Inter', sans-serif; background: linear-gradient(180deg, #020617 0%, #0F172A 100%); height: 100vh; padding: 20px; display: flex; flex-direction: column; }}
+        html {{ height: 100%; }}
+        body {{ height: 100%; overflow-x: hidden; overflow-y: auto; }}
+        body {{ font-family: 'Inter', sans-serif; background: linear-gradient(180deg, #020617 0%, #0F172A 100%); min-height: 100vh; padding: 20px; display: flex; flex-direction: column; }}
         .container {{ flex: 1; display: flex; flex-direction: column; max-width: 1400px; width: 100%; margin: 0 auto; min-height: 0; }}
         .chart-wrapper {{ flex: 1; display: flex; flex-direction: column; background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); border-radius: 16px; padding: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); min-height: 0; }}
         .header {{ flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 12px; }}
@@ -388,6 +389,16 @@ def visualize_boxes(df, boxes, cycle_num):
         .header p {{ font-size: 12px; color: #64748B; margin-top: 4px; }}
         #chart {{ flex: 1; margin: 0 -12px; min-height: 0; }}
         .footer {{ flex-shrink: 0; display: flex; justify-content: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 11px; color: #64748B; }}
+        
+        /* 모바일 대응 */
+        @media (max-width: 768px) {{
+            body {{ padding: 12px; }}
+            .chart-wrapper {{ padding: 12px; border-radius: 12px; min-height: 450px; }}
+            .header h2 {{ font-size: 14px; }}
+            .header p {{ font-size: 10px; }}
+            #chart {{ margin: 0 -6px; min-height: 350px; }}
+            .footer {{ font-size: 9px; margin-top: 8px; padding-top: 8px; }}
+        }}
     </style>
 </head>
 <body>

@@ -62,7 +62,7 @@ function App() {
       {/* 차트 영역 (전체 화면) */}
       <main className="chart-fullscreen">
         <iframe
-          src={`public/charts/${selectedChartData?.filename}`}
+          src={`charts/${selectedChartData?.filename}`}
           title={selectedChartData?.title}
           className="chart-frame"
         />

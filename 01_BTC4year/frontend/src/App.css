@@ -1,0 +1,238 @@
+/* ===== 리셋 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ===== 컨테이너 ===== */
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  background: #0a0a0a;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ===== 햄버거 버튼 ===== */
+.hamburger-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(26, 26, 46, 0.95);
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.hamburger-btn:hover {
+  background: rgba(100, 108, 255, 0.9);
+  transform: scale(1.05);
+}
+
+/* ===== 메뉴 패널 ===== */
+.menu-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.menu-panel.open {
+  transform: translateX(0);
+}
+
+/* 메뉴 헤더 */
+.menu-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 60px; /* 햄버거 버튼 아래로 */
+}
+
+.menu-logo {
+  font-size: 28px;
+}
+
+.menu-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ff6b35;
+}
+
+/* 메뉴 리스트 */
+.menu-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 12px;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: #b0b0b0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+  font-size: 15px;
+}
+
+.menu-item:hover {
+  background: rgba(100, 108, 255, 0.15);
+  color: #ffffff;
+}
+
+.menu-item.active {
+  background: linear-gradient(135deg, #646cff 0%, #535bf2 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(100, 108, 255, 0.4);
+}
+
+.menu-icon {
+  font-size: 22px;
+  width: 28px;
+  text-align: center;
+}
+
+.menu-text {
+  font-weight: 500;
+}
+
+/* ===== 오버레이 ===== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  backdrop-filter: blur(3px);
+}
+
+/* ===== 차트 전체 화면 ===== */
+.chart-fullscreen {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.chart-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #1a1a1a;
+}
+
+/* ===== 반응형: 태블릿 ===== */
+@media (max-width: 768px) {
+  .hamburger-btn {
+    top: 12px;
+    left: 12px;
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+
+  .menu-panel {
+    width: 280px;
+  }
+
+  .menu-header {
+    margin-top: 56px;
+    padding: 20px 16px;
+  }
+
+  .menu-title {
+    font-size: 18px;
+  }
+
+  .menu-item {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+}
+
+/* ===== 반응형: 모바일 ===== */
+@media (max-width: 480px) {
+  .hamburger-btn {
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 10px;
+  }
+
+  .menu-panel {
+    width: 100%;
+  }
+
+  .menu-header {
+    margin-top: 52px;
+    padding: 18px 16px;
+  }
+
+  .menu-logo {
+    font-size: 24px;
+  }
+
+  .menu-title {
+    font-size: 17px;
+  }
+
+  .menu-list {
+    padding: 16px 10px;
+  }
+
+  .menu-item {
+    padding: 14px 14px;
+    border-radius: 10px;
+  }
+
+  .menu-icon {
+    font-size: 20px;
+  }
+
+  .menu-text {
+    font-size: 14px;
+  }
+}

@@ -1,4 +1,4 @@
-name: Daily Python Run
+name: 01_4years_1day_supabase
 
 on:
   schedule:

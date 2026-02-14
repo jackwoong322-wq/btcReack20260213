@@ -1,103 +1,152 @@
+# Bitcoin Cycle Charts - React 컴포넌트
 
-# reactBtc
+Supabase에서 데이터를 가져와 ApexCharts로 시각화하는 React 컴포넌트입니다.
 
-## 프로젝트 소개
-비트코인 4년 주기 데이터 시각화 및 분석을 위한 React + Vite 기반 프론트엔드 프로젝트입니다.
-
-## 주요 기능
-- ApexCharts를 활용한 비트코인 가격 데이터 시각화
-- Supabase 연동을 통한 데이터 조회
-- 다양한 박스 범위 및 사이클별 차트 제공
-
-## 폴더 구조
-```
-reactBtc/
-├── public/         # 정적 파일 및 차트 HTML
-├── src/            # 주요 React 소스 코드
-├── package.json    # 프로젝트 의존성 및 스크립트
-├── vite.config.js  # Vite 설정 파일
-├── README.md       # 프로젝트 설명
-```
-
-## 설치 및 실행
-1. 의존성 설치
-	```
-	npm install
-	```
-2. 개발 서버 실행
-	```
-	npm run dev
-	```
-3. 빌드
-	```
-	npm run build
-	```
-
-## 배포
-- Vercel, Netlify 등 정적 호스팅 서비스에 배포 가능
-- 빌드 결과물(dist 폴더)은 업로드하지 않음
-
-## 환경 변수
-- Supabase 등 외부 서비스 연동 시 .env 파일 사용
-
-## 참고
-- 백엔드(데이터 처리)는 supabase/functions, migrate_to_supabase.py 등 별도 관리
-
----
-문의 및 기여는 이슈 또는 PR로 부탁드립니다.
-
-휴대폰에서는 네트워크 주소를 사용하여 접근하세요.
-
-## 🛠️ 기술 스택
-
-- **React** - UI 프레임워크
-- **Vite** - 빌드 도구
-- **Plotly.js** - 차트 라이브러리 (HTML 임베딩)
-- **CSS3** - 반응형 디자인
-
-## 📂 프로젝트 구조
+## 📁 파일 구조
 
 ```
-reactBtc/
-├── public/
-│   ├── charts/          # HTML 차트 파일들
-│   │   ├── 02_4years_1day_plotly.html
-│   │   ├── 03_4years_1day_boxRanges_1_boxes.html
-│   │   ├── 03_4years_1day_boxRanges_2_boxes.html
-│   │   ├── 03_4years_1day_boxRanges_3_boxes.html
-│   │   └── 03_4years_1day_boxRanges_4_boxes.html
-│   └── vite.svg
-├── src/
-│   ├── App.jsx          # 메인 애플리케이션
-│   ├── App.css          # 스타일시트
-│   ├── index.css        # 글로벌 스타일
-│   └── main.jsx         # 앱 진입점
-├── index.html
-├── package.json
-└── vite.config.js
+react-charts/
+├── components/
+│   ├── CycleComparisonChart.jsx  # 사이클 비교 차트
+│   ├── BearBoxChart.jsx          # 하락장 박스권 차트
+│   ├── BullBoxChart.jsx          # 상승장 박스권 차트
+│   └── index.js                  # 컴포넌트 내보내기
+├── hooks/
+│   └── useChartData.js           # 데이터 로딩 커스텀 훅
+├── utils/
+│   └── chartData.js              # 데이터 처리 및 박스권 계산 로직
+├── styles/
+│   └── Chart.css                 # 공통 스타일
+├── lib/
+│   └── supabase.js               # Supabase 클라이언트
+└── README.md
 ```
 
-## 🎯 기능
+## 🚀 설치
 
-- ✅ 모바일 친화적 반응형 디자인
-- ✅ 차트 간 쉬운 전환
-- ✅ iframe을 통한 Plotly 차트 표시
-- ✅ 다크 테마 UI
-
-## 🔧 배포
-
-### Netlify/Vercel 배포
-
-1. `npm run build`로 빌드
-2. `dist` 폴더를 배포 플랫폼에 업로드
-
-### GitHub Pages 배포
+### 1. 필요한 패키지 설치
 
 ```bash
-npm run build
-# dist 폴더 내용을 GitHub Pages에 배포
+npm install @supabase/supabase-js apexcharts react-apexcharts
 ```
 
-## 📝 라이선스
+### 2. 환경 변수 설정
 
-MIT License
+`.env.local` 파일에 Supabase 정보 추가:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### 3. 파일 복사
+
+`react-charts` 폴더의 내용을 프로젝트에 복사:
+
+```
+src/
+├── components/charts/     ← components/ 내용 복사
+├── hooks/                 ← hooks/ 내용 복사
+├── utils/                 ← utils/ 내용 복사
+├── styles/                ← styles/ 내용 복사
+└── lib/                   ← lib/ 내용 복사
+```
+
+## 📊 사용법
+
+### 사이클 비교 차트
+
+```jsx
+import { CycleComparisonChart } from '@/components/charts'
+
+export default function Page() {
+  return <CycleComparisonChart />
+}
+```
+
+### 하락장 박스권 차트
+
+```jsx
+import { BearBoxChart } from '@/components/charts'
+
+export default function Page() {
+  // cycleNumber: 분석할 사이클 번호 (기본값: 4)
+  return <BearBoxChart cycleNumber={4} />
+}
+```
+
+### 상승장 박스권 차트
+
+```jsx
+import { BullBoxChart } from '@/components/charts'
+
+export default function Page() {
+  // cycleNumber: 분석할 사이클 번호 (기본값: 3)
+  return <BullBoxChart cycleNumber={3} />
+}
+```
+
+## ⚙️ 설정 변경
+
+`utils/chartData.js`에서 설정 변경 가능:
+
+```javascript
+// Bear (하락장) 설정
+export const BEAR_CONFIG = {
+  RISE_THRESHOLD: 5.0,       // 박스 인식을 위한 최소 상승률 (%)
+  BREAK_THRESHOLD: 2.0,      // 박스 이탈 기준 (%)
+  MIN_DURATION_DAYS: 1,      // 최소 박스 기간 (일)
+  MAX_DURATION_DAYS: 420,    // 최대 분석 기간 (일)
+  MIN_DROP_FROM_PREV_HIGH: 3.0,  // 이전 고점 대비 최소 하락률 (%)
+}
+
+// Bull (상승장) 설정
+export const BULL_CONFIG = {
+  MIN_DAYS_FROM_PEAK: 420,   // 420일부터 상승장 분석
+  DROP_THRESHOLD: 5.0,       // 하락률 5% 이상
+  BREAK_THRESHOLD: 2.0,      // 고점에서 2% 이상 상승 시 박스 종료
+  MIN_DURATION_DAYS: 1,
+  LOOKBACK_DAYS: 10,         // N일 범위에서 최고점일 때만 고점으로 인정
+}
+```
+
+## 🗄️ 데이터베이스 구조
+
+Supabase `bitcoin_cycle_data` 테이블:
+
+| 컬럼 | 타입 | 설명 |
+|------|------|------|
+| cycle_number | int | 사이클 번호 (1, 2, 3, 4) |
+| days_since_peak | int | 고점 이후 일수 |
+| timestamp | timestamp | 날짜 |
+| close_rate | float | 종가 비율 (%) |
+| low_rate | float | 저가 비율 (%) |
+| high_rate | float | 고가 비율 (%) |
+
+## 🎨 스타일 커스터마이징
+
+`styles/Chart.css`에서 CSS 변수 수정:
+
+```css
+:root {
+  --bg-primary: #020617;
+  --bg-secondary: #0F172A;
+  --text-primary: #F8FAFC;
+  --color-blue: #3B82F6;
+  /* ... */
+}
+```
+
+## 📱 반응형 지원
+
+- 모바일 (768px 이하): 컴팩트 레이아웃
+- 터치 디바이스: 버튼 크기 증가
+
+## 🔄 기존 Python 코드와의 차이점
+
+| 항목 | Python (기존) | React (신규) |
+|------|--------------|-------------|
+| 데이터 로딩 | Python에서 fetch | 브라우저에서 직접 fetch |
+| 박스권 계산 | Python (Pandas) | JavaScript |
+| 출력 형식 | HTML 파일 | React 컴포넌트 |
+| 실시간 데이터 | 재실행 필요 | 자동 갱신 가능 |

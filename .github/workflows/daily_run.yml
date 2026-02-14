@@ -1,4 +1,4 @@
-name: 01_4years_1day_supabase
+name: btc 4years 1day db update(rate)
 
 on:
   schedule:
@@ -26,4 +26,4 @@ jobs:
           # 필요한 라이브러리가 있다면 여기에 직접 입력 가능 (예: pip install pandas)
 
       - name: Run script
-        run: python 01_BTC4year\backend\src\fourYear\01_4years_1day_supabase.py # 실제 실행할 파이썬 파일명으로 바꾸세요!
+        run: python 01_BTC4year/backend/src/fourYear/01_4years_1day_supabase.py
